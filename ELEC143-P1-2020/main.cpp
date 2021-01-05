@@ -22,21 +22,21 @@ Buzzer buzz;
 DigitalOut traf1RedLED(TRAF_RED1_PIN,1);
 DigitalOut traf1YelLED(TRAF_YEL1_PIN);
 DigitalOut traf1GrnLED(TRAF_GRN1_PIN);
-DigitalInOut traf2RedLED(TRAF_RED2_PIN, PIN_OUTPUT, OpenDrainNoPull, 0);
+DigitalInOut traf2RedLED(TRAF_RED2_PIN, PIN_OUTPUT, OpenDrainNoPull, 1);
 DigitalInOut traf2YelLED(TRAF_YEL2_PIN, PIN_OUTPUT, OpenDrainNoPull, 1);
 DigitalInOut traf2GrnLED(TRAF_GRN2_PIN, PIN_OUTPUT, OpenDrainNoPull, 1);
 
 //Light Levels
 AnalogIn ldr(AN_LDR_PIN);
 
-//Environmental sensor
-EnvironmentalSensor sensor;
-
 //LCD Backlight - consider PwmOut for this :)
 DigitalOut backLight(LCD_BKL_PIN);
 
 int main()
 {
+    //Environmental sensor;
+    EnvironmentalSensor sensor;
+
     //LCD Backlight ON
     backLight = 1;
 
@@ -53,7 +53,7 @@ int main()
         disp.cls();
         disp.printf("LDR: %0.3f", ldr.read());
 
-        float temperature, pressure;
+        float temperature=0.0f, pressure=0.0f;
         temperature=sensor.getTemperature();
         pressure=sensor.getPressure();
 
